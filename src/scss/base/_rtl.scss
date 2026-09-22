@@ -1,0 +1,103 @@
+@use "variables" as *;
+
+// RTL styling
+
+.tabulator.tabulator-ltr {
+	direction: ltr;
+}
+
+.tabulator.tabulator-rtl {
+	text-align: initial;
+	direction: rtl;
+
+	.tabulator-header {
+		.tabulator-col {
+			text-align: initial;
+			border-left: 1px solid $headerBorderColor;
+			border-right: initial;
+
+			&.tabulator-col-group {
+				.tabulator-col-group-cols {
+					margin-right: initial;
+					margin-left: -1px;
+				}
+			}
+
+			&.tabulator-sortable {
+				.tabulator-col-title {
+					padding-right: 0;
+					padding-left: 25px;
+				}
+			}
+
+			.tabulator-col-content {
+				.tabulator-col-sorter {
+					left: 8px;
+					right: initial;
+				}
+			}
+		}
+	}
+
+	.tabulator-tableholder {
+		.tabulator-range-overlay {
+			.tabulator-range {
+				&.tabulator-range-active::after {
+					left: -3px;
+					right: initial;
+				}
+			}
+		}
+	}
+
+	.tabulator-row {
+		.tabulator-cell {
+			border-right: initial;
+			border-left: 1px solid $rowBorderColor;
+
+			.tabulator-data-tree-branch {
+				margin-right: initial;
+				margin-left: 5px;
+
+				border-bottom-left-radius: initial;
+				border-bottom-right-radius: 1px;
+
+				border-left: initial;
+				border-right: 2px solid $rowBorderColor;
+			}
+
+			.tabulator-data-tree-control {
+				margin-right: initial;
+				margin-left: 5px;
+			}
+
+			&.tabulator-frozen {
+
+				&.tabulator-frozen-left {
+					border-left: 2px solid $rowBorderColor;
+				}
+
+				&.tabulator-frozen-right {
+					border-right: 2px solid $rowBorderColor;
+				}
+			}
+		}
+
+		.tabulator-col-resize-handle {
+			&:last-of-type {
+				width: 3px;
+				margin-left: 0;
+				margin-right: -3px;
+			}
+		}
+
+	}
+
+	.tabulator-footer {
+		.tabulator-calcs-holder {
+			text-align: initial;
+		}
+
+	}
+
+}

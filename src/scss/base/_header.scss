@@ -1,0 +1,326 @@
+@use "sass:color";
+@use "variables" as *;
+@use "mixins" as *;
+@use "internal" as *;
+
+// Sort arrow for one aria-sort state, pointing up or down
+@mixin sort-state($color, $direction) {
+	$edge: bottom;
+	$opposite: top;
+
+	@if $direction == down {
+		$edge: top;
+		$opposite: bottom;
+	}
+
+	.tabulator-col-content .tabulator-col-sorter {
+		color: $color;
+
+		@media (hover:hover) and (pointer:fine) {
+			&.tabulator-col-sorter-element .tabulator-arrow:hover {
+				cursor: pointer;
+				border-#{$edge}: $arrowSize solid $sortArrowHover;
+			}
+		}
+
+		.tabulator-arrow {
+			border-#{$opposite}: none;
+			border-#{$edge}: $arrowSize solid $color;
+
+			@if $direction == down {
+				color: $color;
+			}
+		}
+	}
+}
+
+.tabulator {
+	// column header containing element
+	.tabulator-header {
+		position: relative;
+		box-sizing: border-box;
+
+		width: 100%;
+
+		border-bottom: 1px solid $headerSeparatorColor;
+		background-color: $headerBackgroundColor;
+		color: $headerTextColor;
+		font-weight: bold;
+
+		white-space: nowrap;
+		overflow: hidden;
+
+		-moz-user-select: none;
+		-khtml-user-select: none;
+		-webkit-user-select: none;
+		-o-user-select: none;
+
+		outline: none;
+
+		&.tabulator-header-hidden {
+			display: none;
+		}
+
+		.tabulator-header-contents {
+			position: relative;
+			overflow: hidden;
+
+			.tabulator-headers {
+				display: inline-block;
+			}
+		}
+
+		// individual column header element
+		.tabulator-col {
+			display: inline-flex;
+			position: relative;
+			box-sizing: border-box;
+
+			flex-direction: column;
+			justify-content: flex-start;
+
+			border-right: 1px solid $headerBorderColor;
+			background: $headerBackgroundColor;
+
+			text-align: left;
+			vertical-align: bottom;
+			overflow: hidden;
+
+			&.tabulator-moving {
+				position: absolute;
+				border: 1px solid $headerSeparatorColor;
+				background: color.adjust($headerBackgroundColor, $lightness: -10%);
+				pointer-events: none;
+			}
+
+			&.tabulator-range-highlight {
+				@include range-header-highlight;
+			}
+
+			&.tabulator-range-selected {
+				@include range-header-selected;
+			}
+
+			// hold content of column header
+			.tabulator-col-content {
+				box-sizing: border-box;
+				position: relative;
+				padding: 4px;
+
+				// header menu button
+				.tabulator-header-popup-button {
+					padding: 0 8px;
+
+					&:hover {
+						cursor: pointer;
+						opacity: 0.6;
+					}
+				}
+
+				// hold title and sort arrow
+				.tabulator-col-title-holder {
+					position: relative;
+				}
+
+				// hold title of column header
+				.tabulator-col-title {
+					box-sizing: border-box;
+					width: 100%;
+
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					vertical-align: bottom;
+
+					&.tabulator-col-title-wrap {
+						white-space: normal;
+						text-overflow: initial;
+					}
+
+					// element to hold title editor
+					.tabulator-title-editor {
+						box-sizing: border-box;
+						width: 100%;
+
+						border: 1px solid $titleEditorBorderColor;
+
+						padding: 1px;
+
+						background: $titleEditorBackground;
+					}
+
+					.tabulator-header-popup-button + .tabulator-title-editor {
+						width: calc(100% - 22px);
+					}
+				}
+
+				// column sorter arrow
+				.tabulator-col-sorter {
+					display: flex;
+					align-items: center;
+
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					right: 4px;
+
+					.tabulator-arrow {
+						width: 0;
+						height: 0;
+
+						@include triangle(up, $sortArrowInactive);
+					}
+				}
+
+			}
+
+			// complex header column group
+			&.tabulator-col-group {
+
+				// element to hold sub columns in column group
+				.tabulator-col-group-cols {
+					position: relative;
+					display: flex;
+
+					border-top: 1px solid $headerBorderColor;
+					overflow: hidden;
+
+					margin-right: -1px;
+				}
+			}
+
+			// header filter containing element
+			.tabulator-header-filter {
+				position: relative;
+				box-sizing: border-box;
+				margin-top: 2px;
+				width: 100%;
+				text-align: center;
+
+				// styling adjustment for inbuilt editors
+				textarea {
+					height: auto !important;
+				}
+
+				svg {
+					margin-top: 3px;
+				}
+
+				input {
+					&::-ms-clear {
+						width: 0;
+						height: 0;
+					}
+				}
+			}
+
+			// styling child elements for sortable columns
+			&.tabulator-sortable {
+				.tabulator-col-title {
+					padding-right: 25px;
+				}
+
+				@media (hover:hover) and (pointer:fine) {
+					&.tabulator-col-sorter-element:hover {
+						cursor: pointer;
+						background-color: color.adjust($headerBackgroundColor, $lightness: -10%);
+					}
+				}
+
+				&[aria-sort="none"] {
+					@include sort-state($sortArrowInactive, up);
+				}
+
+				&[aria-sort="ascending"] {
+					@include sort-state($sortArrowActive, up);
+				}
+
+				&[aria-sort="descending"] {
+					@include sort-state($sortArrowActive, down);
+				}
+			}
+
+			&.tabulator-col-vertical {
+				.tabulator-col-content {
+					.tabulator-col-title {
+						writing-mode: vertical-rl;
+						text-orientation: mixed;
+
+						display: flex;
+						align-items: center;
+						justify-content: center;
+					}
+				}
+
+				&.tabulator-col-vertical-flip {
+					.tabulator-col-title {
+						transform: rotate(180deg);
+					}
+				}
+
+				&.tabulator-sortable {
+					.tabulator-col-title {
+						padding-right: 0;
+						padding-top: 20px;
+					}
+
+					&.tabulator-col-vertical-flip {
+						.tabulator-col-title {
+							padding-right: 0;
+							padding-bottom: 20px;
+						}
+
+					}
+
+					.tabulator-col-sorter {
+						justify-content: center;
+						left: 0;
+						right: 0;
+						top: 4px;
+						bottom: auto;
+					}
+				}
+			}
+		}
+
+		.tabulator-frozen {
+			position: sticky;
+			left: 0;
+
+			z-index: $zIndexFrozen;
+
+			&.tabulator-frozen-left {
+				border-right: 2px solid $rowBorderColor;
+			}
+
+			&.tabulator-frozen-right {
+				border-left: 2px solid $rowBorderColor;
+			}
+		}
+
+		.tabulator-calcs-holder {
+			box-sizing: border-box;
+			display: inline-block;
+
+			background: color.adjust($headerBackgroundColor, $lightness: 5%) !important;
+
+			border-top: 1px solid $rowBorderColor;
+			border-bottom: 1px solid $headerBorderColor;
+
+			.tabulator-row {
+				background: color.adjust($headerBackgroundColor, $lightness: 5%) !important;
+
+				.tabulator-col-resize-handle {
+					display: none;
+				}
+			}
+		}
+
+		.tabulator-frozen-rows-holder {
+			display: inline-block;
+			&:empty {
+				display: none;
+			}
+		}
+	}
+}

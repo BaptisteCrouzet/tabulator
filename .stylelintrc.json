@@ -1,0 +1,40 @@
+{
+	"extends": [
+		"stylelint-config-standard-scss"
+	],
+	"plugins": [
+		"@stylistic/stylelint-plugin"
+	],
+	"ignoreFiles": [
+		"src/scss/themes/**"
+	],
+	"rules": {
+		"selector-class-pattern": null,
+		"scss/dollar-variable-pattern": null,
+		"scss/at-mixin-pattern": null,
+		"no-descending-specificity": null,
+		"property-no-vendor-prefix": null,
+		"value-no-vendor-prefix": null,
+		"selector-no-vendor-prefix": null,
+		"declaration-empty-line-before": null,
+		"rule-empty-line-before": null,
+		"scss/double-slash-comment-empty-line-before": null,
+		"at-rule-empty-line-before": null,
+		"color-function-notation": null,
+		"color-function-alias-notation": null,
+		"alpha-value-notation": null,
+		"declaration-block-no-redundant-longhand-properties": null,
+		"selector-not-notation": null,
+		"@stylistic/indentation": "tab",
+		"@stylistic/declaration-colon-space-after": "always",
+		"@stylistic/declaration-colon-space-before": "never",
+		"@stylistic/block-opening-brace-space-before": "always",
+		"@stylistic/no-eol-whitespace": true,
+		"@stylistic/max-empty-lines": 1,
+		"@stylistic/selector-list-comma-newline-after": "always",
+		"@stylistic/color-hex-case": "lower",
+		"@stylistic/string-quotes": "double",
+		"@stylistic/number-leading-zero": "always",
+		"@stylistic/no-missing-end-of-source-newline": true
+	}
+}

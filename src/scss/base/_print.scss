@@ -1,0 +1,44 @@
+@use "variables" as *;
+@use "mixins" as *;
+@use "internal" as *;
+
+// Table print styling
+
+.tabulator-print-fullscreen {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	z-index: $zIndexPopup;
+}
+
+body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen) {
+	display: none !important;
+}
+
+.tabulator-print-table {
+	border-collapse: collapse;
+
+	.tabulator-data-tree-branch {
+		@include data-tree-branch;
+	}
+
+	// row grouping element
+	.tabulator-print-table-group {
+		@include group-row {
+			@for $level from 1 through 5 {
+				&.tabulator-group-level-#{$level} {
+					td {
+						padding-left: group-level-indent($level) !important;
+					}
+				}
+			}
+		}
+	}
+
+	.tabulator-data-tree-control {
+		@include data-tree-control;
+	}
+}

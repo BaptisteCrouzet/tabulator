@@ -1,0 +1,14 @@
+@use "mixins" as *;
+
+.tabulator-row {
+	// row grouping element
+	&.tabulator-group {
+		@include group-row {
+			@for $level from 1 through 5 {
+				&.tabulator-group-level-#{$level} {
+					padding-left: group-level-indent($level);
+				}
+			}
+		}
+	}
+}

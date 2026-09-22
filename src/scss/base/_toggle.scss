@@ -1,0 +1,22 @@
+@use "variables" as *;
+
+.tabulator-toggle {
+	box-sizing: border-box;
+
+	display: flex;
+	flex-direction: row;
+
+	border: 1px solid $toggleBorderColor;
+	background: $toggleBackground;
+
+	&.tabulator-toggle-on {
+		background: $toggleOnBackground;
+	}
+
+	.tabulator-toggle-switch {
+		box-sizing: border-box;
+		border: 1px solid $toggleBorderColor;
+
+		background: $toggleSwitchBackground;
+	}
+}

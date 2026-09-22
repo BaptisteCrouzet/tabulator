@@ -1,0 +1,154 @@
+@use "sass:color";
+@use "variables" as *;
+
+.tabulator {
+	// footer element
+	.tabulator-footer {
+		border-top: 1px solid $footerSeparatorColor;
+		background-color: $footerBackgroundColor;
+
+		color: $footerTextColor;
+		font-weight: bold;
+		white-space: nowrap;
+		user-select: none;
+
+		-moz-user-select: none;
+		-khtml-user-select: none;
+		-webkit-user-select: none;
+		-o-user-select: none;
+
+		.tabulator-footer-contents {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+
+			padding: 5px 10px;
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.tabulator-spreadsheet-tabs {
+			margin-top: -5px;
+
+			overflow-x: auto;
+
+			.tabulator-spreadsheet-tab {
+				display: inline-block;
+				padding: 5px;
+
+				border: $borderColor 1px solid;
+				border-top: none;
+				border-bottom-left-radius: 5px;
+				border-bottom-right-radius: 5px;
+
+				font-size: 0.9em;
+
+				&:hover {
+					cursor: pointer;
+					opacity: 0.7;
+				}
+
+				&.tabulator-spreadsheet-tab-active {
+					background: $spreadsheetActiveTabColor;
+				}
+			}
+		}
+
+		.tabulator-calcs-holder {
+			box-sizing: border-box;
+			width: 100%;
+
+			text-align: left;
+
+			background: color.adjust($footerBackgroundColor, $lightness: 5%) !important;
+			border-bottom: 1px solid $rowBorderColor;
+			border-top: 1px solid $rowBorderColor;
+
+			overflow: hidden;
+
+			.tabulator-row {
+				display: inline-block;
+				background: color.adjust($footerBackgroundColor, $lightness: 5%) !important;
+
+				.tabulator-col-resize-handle {
+					display: none;
+				}
+			}
+
+			&:only-child {
+				margin-bottom: -5px;
+				border-bottom: none;
+			}
+		}
+
+		&>*+.tabulator-page-counter {
+			margin-left: 10px;
+		}
+
+		.tabulator-page-counter {
+			font-weight: normal;
+		}
+
+		.tabulator-paginator {
+			flex: 1;
+
+			text-align: right;
+
+			color: $footerTextColor;
+			font-family: inherit;
+			font-weight: inherit;
+			font-size: inherit;
+		}
+
+		// pagination container element
+		.tabulator-page-size {
+			display: inline-block;
+
+			margin: 0 5px;
+			padding: 2px 5px;
+
+			border: 1px solid $footerBorderColor;
+			border-radius: 3px;
+		}
+
+		.tabulator-pages {
+			margin: 0 7px;
+		}
+
+		// pagination button
+		.tabulator-page {
+			display: inline-block;
+
+			margin: 0 2px;
+			padding: 2px 5px;
+
+			border: 1px solid $footerBorderColor;
+			border-radius: 3px;
+
+			background: rgba(255,255,255,0.2);
+
+			&.active {
+				color: $footerActiveColor;
+			}
+
+			&:disabled {
+				opacity: 0.5;
+			}
+
+			// TODO: should be :not(:disabled); kept as-is to preserve output
+			// stylelint-disable-next-line selector-type-no-unknown
+			&:not(disabled) {
+				@media (hover:hover) and (pointer:fine) {
+					&:hover {
+						cursor: pointer;
+						background: rgba(0,0,0,0.2);
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+}

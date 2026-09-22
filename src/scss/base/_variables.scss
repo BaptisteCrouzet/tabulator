@@ -1,0 +1,87 @@
+// Public theme variables, configurable through `@use "tabulator" with (...)`.
+
+// Table
+$backgroundColor: #888 !default; // table background, visible behind rows
+$borderColor: #999 !default; // outer table border
+$textSize: 14px !default; // base font size
+
+// Header
+$headerBackgroundColor: #e6e6e6 !default; // header background
+$headerTextColor: #555 !default; // header text color
+$headerBorderColor: #aaa !default; // borders between column headers
+$headerSeparatorColor: #999 !default; // border between header and body
+$headerMargin: 4px !default; // vertical cell padding, used for row min-height
+
+// Sort arrows
+$sortArrowHover: #555 !default; // sort arrow color on hover
+$sortArrowActive: #666 !default; // sort arrow color when sorted
+$sortArrowInactive: #bbb !default; // sort arrow color when not sorted
+
+// Tick / cross formatters
+$tickColor: #2dc214 !default;
+$crossColor: #ce1515 !default;
+
+// Resize
+$columnResizeGuideColor: #999 !default; // column and row resize guide
+
+// Rows
+$rowBackgroundColor: #fff !default; // row background
+$rowAltBackgroundColor: #efefef !default; // even row background
+$rowBorderColor: #aaa !default; // cell and row borders
+$rowTextColor: #333 !default; // row text color
+$rowHoverBackground: #bbb !default; // row background on hover
+$rowSelectedBackground: #9abcea !default; // selected row background
+$rowSelectedBackgroundHover: #769bcc !default; // selected row background on hover
+
+// Editing
+$editBoxColor: #1d68cd !default; // editing cell border, active list item
+$errorColor: #d00 !default; // validation failure
+
+// Footer
+$footerBackgroundColor: #e6e6e6 !default; // footer background
+$footerTextColor: #555 !default; // footer text color
+$footerBorderColor: #aaa !default; // pagination button borders
+$footerSeparatorColor: #999 !default; // border between body and footer
+$footerActiveColor: #d00 !default; // active pagination button text
+$spreadsheetActiveTabColor: #fff !default; // active spreadsheet tab background
+
+// Range selection
+$rangeBorderColor: #2975dd !default; // range border
+$rangeHandleColor: $rangeBorderColor !default; // range resize handle
+$rangeHeaderSelectedBackground: #3876ca !default; // selected header background
+$rangeHeaderSelectedTextColor: #fff !default; // selected header text color
+$rangeHeaderHighlightBackground: #d6d6d6 !default; // highlighted header background
+$rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text color (named "Background" for backward compatibility)
+
+// Title editor
+$titleEditorBorderColor: #999 !default;
+$titleEditorBackground: #fff !default;
+
+// Placeholder
+$placeholderTextColor: #ccc !default; // empty table message
+
+// Row states and controls
+$rowMovingBorderColor: #000 !default; // row being moved
+$rowMovingBackground: #fff !default;
+$rowHandleColor: #666 !default; // movable row handle bars
+$responsiveToggleBackground: #666 !default; // responsive collapse toggle
+
+// Row groups
+$groupBackgroundColor: #ccc !default;
+$groupBorderColor: #999 !default;
+$groupHoverBackground: rgba(0, 0, 0, 0.1) !default;
+$groupCountColor: #d00 !default; // group row count text
+
+// Toggle
+$toggleBorderColor: #ccc !default;
+$toggleBackground: #dcdcdc !default;
+$toggleOnBackground: #1c6cc2 !default;
+$toggleSwitchBackground: #fff !default;
+
+// Alert (loader / error overlay)
+$alertBackdropColor: rgba(0, 0, 0, 0.4) !default;
+$alertMsgBackground: #fff !default;
+$alertMsgBorderColor: #333 !default;
+$alertMsgTextColor: #000 !default;
+$alertErrorBorderColor: #d00 !default;
+$alertErrorTextColor: #590000 !default;

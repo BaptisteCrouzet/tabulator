@@ -1,0 +1,113 @@
+@use "variables" as *;
+@use "mixins" as *;
+@use "internal" as *;
+
+// Row element
+.tabulator-row {
+	position: relative;
+	box-sizing: border-box;
+	min-height: $textSize + ($headerMargin * 2);
+	background-color: $rowBackgroundColor;
+
+	&.tabulator-row-even {
+		background-color: $rowAltBackgroundColor;
+	}
+
+	@media (hover:hover) and (pointer:fine) {
+		&.tabulator-selectable:hover {
+			background-color: $rowHoverBackground;
+			cursor: pointer;
+		}
+	}
+
+	&.tabulator-selected {
+		background-color: $rowSelectedBackground;
+	}
+
+	@media (hover:hover) and (pointer:fine) {
+		&.tabulator-selected:hover {
+			background-color: $rowSelectedBackgroundHover;
+			cursor: pointer;
+		}
+	}
+
+	&.tabulator-row-moving {
+		border: 1px solid $rowMovingBorderColor;
+		background: $rowMovingBackground;
+	}
+
+	&.tabulator-moving {
+		position: absolute;
+
+		border-top: 1px solid  $rowBorderColor;
+		border-bottom: 1px solid  $rowBorderColor;
+
+		pointer-events: none;
+		z-index: $zIndexMovingRow;
+	}
+
+	&.tabulator-range-highlight {
+		.tabulator-cell.tabulator-range-row-header {
+			@include range-header-highlight;
+		}
+
+		&.tabulator-range-selected {
+			.tabulator-cell.tabulator-range-row-header {
+				@include range-header-selected;
+			}
+		}
+	}
+
+	&.tabulator-range-selected {
+		.tabulator-cell.tabulator-range-row-header {
+			@include range-header-selected;
+		}
+	}
+
+	// row resize handles
+	.tabulator-row-resize-handle {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: 5px;
+
+		&.prev {
+			top: 0;
+			bottom: auto;
+		}
+
+		@media (hover:hover) and (pointer:fine) {
+			&:hover {
+				cursor: ns-resize;
+			}
+		}
+	}
+
+	.tabulator-responsive-collapse {
+		box-sizing: border-box;
+
+		padding: 5px;
+
+		border-top: 1px solid $rowBorderColor;
+		border-bottom: 1px solid $rowBorderColor;
+
+		&:empty {
+			display: none;
+		}
+
+		table {
+			font-size: $textSize;
+
+			tr {
+				td {
+					position: relative;
+
+					&:first-of-type {
+						padding-right: 10px;
+					}
+				}
+			}
+		}
+	}
+}

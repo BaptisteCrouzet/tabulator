@@ -1,0 +1,50 @@
+@use "variables" as *;
+
+.tabulator-menu {
+	.tabulator-menu-item {
+		position: relative;
+		box-sizing: border-box;
+
+		padding: 5px 10px;
+
+		user-select: none;
+
+		&.tabulator-menu-item-disabled {
+			opacity: 0.5;
+		}
+
+		@media (hover:hover) and (pointer:fine) {
+			&:not(.tabulator-menu-item-disabled):hover {
+				cursor: pointer;
+				background: $rowAltBackgroundColor;
+			}
+		}
+
+		&.tabulator-menu-item-submenu {
+			padding-right: 25px;
+
+			&::after {
+				display: inline-block;
+				position: absolute;
+
+				top: calc(5px + 0.4em);
+				right: 10px;
+				height: 7px;
+				width: 7px;
+
+				content: "";
+
+				border-width: 1px 1px 0 0;
+				border-style: solid;
+				border-color: $rowBorderColor;
+				vertical-align: top;
+
+				transform: rotate(45deg);
+			}
+		}
+	}
+
+	.tabulator-menu-separator {
+		border-top: 1px solid $rowBorderColor;
+	}
+}
