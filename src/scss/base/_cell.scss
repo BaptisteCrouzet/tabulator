@@ -1,0 +1,252 @@
+@use "variables" as *;
+@use "internal" as *;
+
+.tabulator-row {
+	// cell element
+	.tabulator-cell {
+		display: inline-block;
+		position: relative;
+		box-sizing: border-box;
+		padding: 4px;
+		border-right: 1px solid $rowBorderColor;
+		vertical-align: middle;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		outline: none;
+
+		.tabulator-tick {
+			fill: $tickColor;
+		}
+
+		.tabulator-cross {
+			fill: $crossColor;
+		}
+
+		&.tabulator-row-header {
+			border-right: 1px solid $borderColor;
+			border-bottom: 1px solid $rowBorderColor;
+			background: $headerBackgroundColor;
+		}
+
+		&.tabulator-frozen {
+			display: inline-block;
+			position: sticky;
+
+			left: 0;
+
+			background-color: inherit;
+
+			z-index: $zIndexFrozen;
+
+			&.tabulator-frozen-left {
+				border-right: 2px solid $rowBorderColor;
+			}
+
+			&.tabulator-frozen-right {
+				border-left: 2px solid $rowBorderColor;
+			}
+		}
+
+		&.tabulator-editing {
+			border: 1px solid $editBoxColor;
+			outline: none;
+
+			padding: 0;
+
+			input,
+			select {
+				border: 1px;
+				background: transparent;
+				outline: none;
+			}
+		}
+
+		&.tabulator-validation-fail {
+			border: 1px solid $errorColor;
+
+			input,
+			select {
+				border: 1px;
+				background: transparent;
+
+				color: $errorColor;
+			}
+		}
+
+		// movable row handle
+		&.tabulator-row-handle {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+			-o-user-select: none;
+
+			// handle holder
+			.tabulator-row-handle-box {
+				width: 80%;
+
+				// Hamburger element
+				.tabulator-row-handle-bar {
+					width: 100%;
+					height: 3px;
+					margin-top: 2px;
+					background: $rowHandleColor;
+				}
+			}
+		}
+
+		&.tabulator-range-selected:not(.tabulator-range-only-cell-selected):not(.tabulator-range-row-header) {
+			background-color: $rowSelectedBackground;
+		}
+
+		.tabulator-data-tree-branch-empty {
+			display: inline-block;
+			width: 7px;
+		}
+
+		.tabulator-data-tree-branch {
+			display: inline-block;
+			vertical-align: middle;
+
+			height: 9px;
+			width: 7px;
+
+			margin-top: -9px;
+			margin-right: 5px;
+
+			border-bottom-left-radius: 1px;
+
+			border-left: 2px solid $rowBorderColor;
+			border-bottom: 2px solid $rowBorderColor;
+		}
+
+		.tabulator-data-tree-control {
+
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			vertical-align: middle;
+
+			height: 11px;
+			width: 11px;
+
+			margin-right: 5px;
+
+			border: 1px solid $rowTextColor;
+			border-radius: 2px;
+			background: rgba(0, 0, 0, 0.1);
+
+			overflow: hidden;
+
+			@media (hover:hover) and (pointer:fine) {
+				&:hover {
+					cursor: pointer;
+					background: rgba(0, 0, 0, 0.2);
+				}
+			}
+
+			.tabulator-data-tree-control-collapse {
+				display: inline-block;
+				position: relative;
+
+				height: 7px;
+				width: 1px;
+
+				background: transparent;
+
+				&::after {
+					position: absolute;
+					content: "";
+					left: -3px;
+					top: 3px;
+
+					height: 1px;
+					width: 7px;
+
+					background: $rowTextColor;
+				}
+			}
+
+			.tabulator-data-tree-control-expand {
+				display: inline-block;
+				position: relative;
+
+				height: 7px;
+				width: 1px;
+
+				background: $rowTextColor;
+
+				&::after {
+					position: absolute;
+					content: "";
+					left: -3px;
+					top: 3px;
+
+					height: 1px;
+					width: 7px;
+
+					background: $rowTextColor;
+				}
+			}
+
+		}
+
+		.tabulator-responsive-collapse-toggle {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+			-o-user-select: none;
+
+			height: 15px;
+			width: 15px;
+
+			border-radius: 20px;
+			background: $responsiveToggleBackground;
+
+			color: $rowBackgroundColor;
+			font-weight: bold;
+			font-size: 1.1em;
+
+			@media (hover:hover) and (pointer:fine) {
+				&:hover {
+					opacity: 0.7;
+					cursor: pointer;
+				}
+			}
+
+			&.open {
+				.tabulator-responsive-collapse-toggle-close {
+					display: initial;
+				}
+
+				.tabulator-responsive-collapse-toggle-open {
+					display: none;
+				}
+			}
+
+			svg {
+				stroke: $rowBackgroundColor;
+			}
+
+			.tabulator-responsive-collapse-toggle-close {
+				display: none;
+			}
+		}
+
+		.tabulator-traffic-light {
+			display: inline-block;
+			height: 14px;
+			width: 14px;
+
+			border-radius: 14px;
+		}
+	}
+}

@@ -1,0 +1,38 @@
+@use "variables" as *;
+
+// Tabulator containing element
+.tabulator {
+	position: relative;
+	border: 1px solid $borderColor;
+	background-color: $backgroundColor;
+	font-size: $textSize;
+	text-align: left;
+	overflow: hidden;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+
+	&[tabulator-layout="fitDataFill"] {
+		.tabulator-tableholder {
+			.tabulator-table {
+				min-width: 100%;
+			}
+		}
+	}
+
+	&[tabulator-layout="fitDataTable"] {
+		display: inline-block;
+	}
+
+	&.tabulator-block-select {
+		user-select: none;
+	}
+
+	&.tabulator-ranges {
+		.tabulator-cell:not(.tabulator-editing) {
+			user-select: none;
+		}
+	}
+}

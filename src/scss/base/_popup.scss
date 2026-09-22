@@ -1,0 +1,38 @@
+@use "variables" as *;
+@use "internal" as *;
+
+.tabulator-popup-container {
+	position: absolute;
+	display: inline-block;
+	box-sizing: border-box;
+
+	background: $rowBackgroundColor;
+	border: 1px solid $rowBorderColor;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+
+	font-size: $textSize;
+
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+
+	z-index: $zIndexPopup;
+}
+
+.tabulator-popup {
+	padding: 5px;
+
+	border-radius: 3px;
+}
+
+.tabulator-tooltip {
+	max-width: min(500px, 100%);
+
+	padding: 3px 5px;
+
+	border-radius: 2px;
+	box-shadow: none;
+
+	font-size: 12px;
+
+	pointer-events: none;
+}

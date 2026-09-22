@@ -1,0 +1,193 @@
+@use "variables" as *;
+@use "internal" as *;
+
+// Table print styling
+
+.tabulator-print-fullscreen {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	z-index: $zIndexPopup;
+}
+
+body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen) {
+	display: none !important;
+}
+
+.tabulator-print-table {
+	border-collapse: collapse;
+
+	.tabulator-data-tree-branch {
+		display: inline-block;
+		vertical-align: middle;
+
+		height: 9px;
+		width: 7px;
+
+		margin-top: -9px;
+		margin-right: 5px;
+
+		border-bottom-left-radius: 1px;
+
+		border-left: 2px solid $rowBorderColor;
+		border-bottom: 2px solid $rowBorderColor;
+	}
+
+	// row grouping element
+	.tabulator-print-table-group {
+		box-sizing: border-box;
+		border-bottom: 1px solid $groupBorderColor;
+		border-right: 1px solid $rowBorderColor;
+		border-top: 1px solid $groupBorderColor;
+		padding: 5px;
+		padding-left: 10px;
+		background: $groupBackgroundColor;
+		font-weight: bold;
+
+		min-width: 100%;
+
+		@media (hover:hover) and (pointer:fine) {
+			&:hover {
+				cursor: pointer;
+				background-color: $groupHoverBackground;
+			}
+		}
+
+		&.tabulator-group-visible {
+
+			.tabulator-arrow {
+				margin-right: 10px;
+				border-left: $arrowSize solid transparent;
+				border-right: $arrowSize solid transparent;
+				border-top: $arrowSize solid $sortArrowActive;
+				border-bottom: 0;
+			}
+
+		}
+
+		&.tabulator-group-level-1 {
+			td {
+				padding-left: 30px !important;
+			}
+		}
+
+		&.tabulator-group-level-2 {
+			td {
+				padding-left: 50px !important;
+			}
+		}
+
+		&.tabulator-group-level-3 {
+			td {
+				padding-left: 70px !important;
+			}
+		}
+
+		&.tabulator-group-level-4 {
+			td {
+				padding-left: 90px !important;
+			}
+		}
+
+		&.tabulator-group-level-5 {
+			td {
+				padding-left: 110px !important;
+			}
+		}
+
+		.tabulator-group-toggle {
+			display: inline-block;
+		}
+
+		// sorting arrow
+		.tabulator-arrow {
+			display: inline-block;
+			width: 0;
+			height: 0;
+			margin-right: 16px;
+			border-top: $arrowSize solid transparent;
+			border-bottom: $arrowSize solid transparent;
+			border-right: 0;
+			border-left: $arrowSize solid $sortArrowActive;
+			vertical-align: middle;
+		}
+
+		span {
+			margin-left: 10px;
+			color: $groupCountColor;
+		}
+	}
+
+	.tabulator-data-tree-control {
+
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		vertical-align: middle;
+
+		height: 11px;
+		width: 11px;
+
+		margin-right: 5px;
+
+		border: 1px solid $rowTextColor;
+		border-radius: 2px;
+		background: rgba(0, 0, 0, 0.1);
+
+		overflow: hidden;
+
+		@media (hover:hover) and (pointer:fine) {
+			&:hover {
+				cursor: pointer;
+				background: rgba(0, 0, 0, 0.2);
+			}
+		}
+
+		.tabulator-data-tree-control-collapse {
+			display: inline-block;
+			position: relative;
+
+			height: 7px;
+			width: 1px;
+
+			background: transparent;
+
+			&::after {
+				position: absolute;
+				content: "";
+				left: -3px;
+				top: 3px;
+
+				height: 1px;
+				width: 7px;
+
+				background: $rowTextColor;
+			}
+		}
+
+		.tabulator-data-tree-control-expand {
+			display: inline-block;
+			position: relative;
+
+			height: 7px;
+			width: 1px;
+
+			background: $rowTextColor;
+
+			&::after {
+				position: absolute;
+				content: "";
+				left: -3px;
+				top: 3px;
+
+				height: 1px;
+				width: 7px;
+
+				background: $rowTextColor;
+			}
+		}
+	}
+}
