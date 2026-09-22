@@ -53,6 +53,48 @@ $rangeHeaderSelectedTextColor: #fff !default; // selected header text color
 $rangeHeaderHighlightBackground: #d6d6d6 !default; // highlighted header background
 $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text color (named "Background" for backward compatibility)
 
+// Title editor
+$titleEditorBorderColor: #999 !default;
+$titleEditorBackground: #fff !default;
+
+// Placeholder
+$placeholderTextColor: #ccc !default; // empty table message
+
+// Row states and controls
+$rowMovingBorderColor: #000 !default; // row being moved
+$rowMovingBackground: #fff !default;
+$rowHandleColor: #666 !default; // movable row handle bars
+$responsiveToggleBackground: #666 !default; // responsive collapse toggle
+
+// Row groups
+$groupBackgroundColor: #ccc !default;
+$groupBorderColor: #999 !default;
+$groupHoverBackground: rgba(0, 0, 0, 0.1) !default;
+$groupCountColor: #d00 !default; // group row count text
+
+// Toggle
+$toggleBorderColor: #ccc !default;
+$toggleBackground: #dcdcdc !default;
+$toggleOnBackground: #1c6cc2 !default;
+$toggleSwitchBackground: #fff !default;
+
+// Alert (loader / error overlay)
+$alertBackdropColor: rgba(0, 0, 0, 0.4) !default;
+$alertMsgBackground: #fff !default;
+$alertMsgBorderColor: #333 !default;
+$alertMsgTextColor: #000 !default;
+$alertErrorBorderColor: #d00 !default;
+$alertErrorTextColor: #590000 !default;
+
+// Private, not configurable
+$-arrowSize: 6px;
+$-zIndexFrozen: 11;
+$-zIndexRangeOverlay: 11;
+$-zIndexResizeHandle: 11;
+$-zIndexMovingRow: 15;
+$-zIndexAlert: 100;
+$-zIndexPopup: 10000;
+
 // Tabulator Containing Element
 .tabulator {
 	position: relative;
@@ -202,11 +244,11 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 						box-sizing: border-box;
 						width: 100%;
 
-						border: 1px solid #999;
+						border: 1px solid $titleEditorBorderColor;
 
 						padding: 1px;
 
-						background: #fff;
+						background: $titleEditorBackground;
 					}
 
 					.tabulator-header-popup-button + .tabulator-title-editor {
@@ -227,9 +269,9 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 					.tabulator-arrow {
 						width: 0;
 						height: 0;
-						border-left: 6px solid transparent;
-						border-right: 6px solid transparent;
-						border-bottom: 6px solid $sortArrowInactive;
+						border-left: $-arrowSize solid transparent;
+						border-right: $-arrowSize solid transparent;
+						border-bottom: $-arrowSize solid $sortArrowInactive;
 					}
 				}
 
@@ -295,13 +337,13 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 						@media (hover:hover) and (pointer:fine) {
 							&.tabulator-col-sorter-element .tabulator-arrow:hover {
 								cursor: pointer;
-								border-bottom: 6px solid $sortArrowHover;
+								border-bottom: $-arrowSize solid $sortArrowHover;
 							}
 						}
 
 						.tabulator-arrow {
 							border-top: none;
-							border-bottom: 6px solid $sortArrowInactive;
+							border-bottom: $-arrowSize solid $sortArrowInactive;
 						}
 					}
 				}
@@ -313,13 +355,13 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 						@media (hover:hover) and (pointer:fine) {
 							&.tabulator-col-sorter-element .tabulator-arrow:hover {
 								cursor: pointer;
-								border-bottom: 6px solid $sortArrowHover;
+								border-bottom: $-arrowSize solid $sortArrowHover;
 							}
 						}
 
 						.tabulator-arrow {
 							border-top: none;
-							border-bottom: 6px solid $sortArrowActive;
+							border-bottom: $-arrowSize solid $sortArrowActive;
 
 						}
 					}
@@ -332,13 +374,13 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 						@media (hover:hover) and (pointer:fine) {
 							&.tabulator-col-sorter-element .tabulator-arrow:hover {
 								cursor: pointer;
-								border-top: 6px solid $sortArrowHover;
+								border-top: $-arrowSize solid $sortArrowHover;
 							}
 						}
 
 						.tabulator-arrow {
 							border-bottom: none;
-							border-top: 6px solid $sortArrowActive;
+							border-top: $-arrowSize solid $sortArrowActive;
 							color: $sortArrowActive;
 						}
 					}
@@ -392,7 +434,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 			position: sticky;
 			left: 0;
 
-			z-index: 11;
+			z-index: $-zIndexFrozen;
 
 			&.tabulator-frozen-left {
 				border-right: 2px solid $rowBorderColor;
@@ -461,7 +503,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 
 				padding: 10px;
 
-				color: #ccc;
+				color: $placeholderTextColor;
 				font-weight: bold;
 				font-size: 20px;
 
@@ -499,7 +541,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 		.tabulator-range-overlay {
 			position: absolute;
 			inset: 0;
-			z-index: 11;
+			z-index: $-zIndexRangeOverlay;
 			pointer-events: none;
 
 			.tabulator-range {
@@ -686,7 +728,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 		margin-left: -3px;
 		margin-right: -3px;
 
-		z-index: 11;
+		z-index: $-zIndexResizeHandle;
 		vertical-align: middle;
 
 		@media (hover:hover) and (pointer:fine) {
@@ -731,11 +773,11 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 
 		top: 0;
 		left: 0;
-		z-index: 100;
+		z-index: $-zIndexAlert;
 
 		height: 100%;
 		width: 100%;
-		background: rgba(0,0,0,0.4);
+		background: $alertBackdropColor;
 		text-align: center;
 
 		// loading message element
@@ -747,20 +789,20 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 
 			border-radius: 10px;
 
-			background: #fff;
+			background: $alertMsgBackground;
 			font-weight: bold;
 			font-size: 16px;
 
 			// loading message
 			&.tabulator-alert-state-msg {
-				border: 4px solid #333;
-				color: #000;
+				border: 4px solid $alertMsgBorderColor;
+				color: $alertMsgTextColor;
 			}
 
 			// error message
 			&.tabulator-alert-state-error {
-				border: 4px solid #d00;
-				color: #590000;
+				border: 4px solid $alertErrorBorderColor;
+				color: $alertErrorTextColor;
 			}
 		}
 	}
@@ -796,8 +838,8 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 	}
 
 	&.tabulator-row-moving {
-		border: 1px solid #000;
-		background: #fff;
+		border: 1px solid $rowMovingBorderColor;
+		background: $rowMovingBackground;
 	}
 
 	&.tabulator-moving {
@@ -807,7 +849,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 		border-bottom: 1px solid  $rowBorderColor;
 
 		pointer-events: none;
-		z-index: 15;
+		z-index: $-zIndexMovingRow;
 	}
 
 	&.tabulator-range-highlight {
@@ -913,7 +955,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 
 			background-color: inherit;
 
-			z-index: 11;
+			z-index: $-zIndexFrozen;
 
 			&.tabulator-frozen-left {
 				border-right: 2px solid $rowBorderColor;
@@ -970,7 +1012,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 					width: 100%;
 					height: 3px;
 					margin-top: 2px;
-					background: #666;
+					background: $rowHandleColor;
 				}
 			}
 		}
@@ -1085,7 +1127,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 			width: 15px;
 
 			border-radius: 20px;
-			background: #666;
+			background: $responsiveToggleBackground;
 
 			color: $rowBackgroundColor;
 			font-weight: bold;
@@ -1129,12 +1171,12 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 	// row grouping element
 	&.tabulator-group {
 		box-sizing: border-box;
-		border-bottom: 1px solid #999;
+		border-bottom: 1px solid $groupBorderColor;
 		border-right: 1px solid $rowBorderColor;
-		border-top: 1px solid #999;
+		border-top: 1px solid $groupBorderColor;
 		padding: 5px;
 		padding-left: 10px;
-		background: #ccc;
+		background: $groupBackgroundColor;
 		font-weight: bold;
 
 		min-width: 100%;
@@ -1142,7 +1184,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 		@media (hover:hover) and (pointer:fine) {
 			&:hover {
 				cursor: pointer;
-				background-color: rgba(0,0,0,0.1);
+				background-color: $groupHoverBackground;
 			}
 		}
 
@@ -1150,9 +1192,9 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 
 			.tabulator-arrow {
 				margin-right: 10px;
-				border-left: 6px solid transparent;
-				border-right: 6px solid transparent;
-				border-top: 6px solid $sortArrowActive;
+				border-left: $-arrowSize solid transparent;
+				border-right: $-arrowSize solid transparent;
+				border-top: $-arrowSize solid $sortArrowActive;
 				border-bottom: 0;
 			}
 
@@ -1188,16 +1230,16 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 			width: 0;
 			height: 0;
 			margin-right: 16px;
-			border-top: 6px solid transparent;
-			border-bottom: 6px solid transparent;
+			border-top: $-arrowSize solid transparent;
+			border-bottom: $-arrowSize solid transparent;
 			border-right: 0;
-			border-left: 6px solid $sortArrowActive;
+			border-left: $-arrowSize solid $sortArrowActive;
 			vertical-align: middle;
 		}
 
 		span {
 			margin-left: 10px;
-			color: #d00;
+			color: $groupCountColor;
 		}
 	}
 
@@ -1209,18 +1251,18 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 	display: flex;
 	flex-direction: row;
 
-	border: 1px solid #ccc;
-	background: #dcdcdc;
+	border: 1px solid $toggleBorderColor;
+	background: $toggleBackground;
 
 	&.tabulator-toggle-on {
-		background: #1c6cc2;
+		background: $toggleOnBackground;
 	}
 
 	.tabulator-toggle-switch {
 		box-sizing: border-box;
-		border: 1px solid #ccc;
+		border: 1px solid $toggleBorderColor;
 
-		background: #fff;
+		background: $toggleSwitchBackground;
 	}
 }
 
@@ -1238,7 +1280,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 
-	z-index: 10000;
+	z-index: $-zIndexPopup;
 }
 
 .tabulator-popup {
@@ -1502,7 +1544,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text c
 	left: 0;
 	right: 0;
 
-	z-index: 10000;
+	z-index: $-zIndexPopup;
 }
 
 body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen) {
@@ -1531,12 +1573,12 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen) {
 	// row grouping element
 	.tabulator-print-table-group {
 		box-sizing: border-box;
-		border-bottom: 1px solid #999;
+		border-bottom: 1px solid $groupBorderColor;
 		border-right: 1px solid $rowBorderColor;
-		border-top: 1px solid #999;
+		border-top: 1px solid $groupBorderColor;
 		padding: 5px;
 		padding-left: 10px;
-		background: #ccc;
+		background: $groupBackgroundColor;
 		font-weight: bold;
 
 		min-width: 100%;
@@ -1544,7 +1586,7 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen) {
 		@media (hover:hover) and (pointer:fine) {
 			&:hover {
 				cursor: pointer;
-				background-color: rgba(0,0,0,0.1);
+				background-color: $groupHoverBackground;
 			}
 		}
 
@@ -1552,9 +1594,9 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen) {
 
 			.tabulator-arrow {
 				margin-right: 10px;
-				border-left: 6px solid transparent;
-				border-right: 6px solid transparent;
-				border-top: 6px solid $sortArrowActive;
+				border-left: $-arrowSize solid transparent;
+				border-right: $-arrowSize solid transparent;
+				border-top: $-arrowSize solid $sortArrowActive;
 				border-bottom: 0;
 			}
 
@@ -1600,16 +1642,16 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen) {
 			width: 0;
 			height: 0;
 			margin-right: 16px;
-			border-top: 6px solid transparent;
-			border-bottom: 6px solid transparent;
+			border-top: $-arrowSize solid transparent;
+			border-bottom: $-arrowSize solid transparent;
 			border-right: 0;
-			border-left: 6px solid $sortArrowActive;
+			border-left: $-arrowSize solid $sortArrowActive;
 			vertical-align: middle;
 		}
 
 		span {
 			margin-left: 10px;
-			color: #d00;
+			color: $groupCountColor;
 		}
 	}
 
