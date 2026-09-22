@@ -1,54 +1,57 @@
 @use "sass:color";
 
-// Main Theme Variables
-$backgroundColor: #888 !default; // background color of tabulator
-$borderColor: #999 !default; // border to tabulator
-$textSize: 14px !default; // table text size
+// Table
+$backgroundColor: #888 !default; // table background, visible behind rows
+$borderColor: #999 !default; // outer table border
+$textSize: 14px !default; // base font size
 
-// header theming
-$headerBackgroundColor: #e6e6e6 !default; // border to tabulator
+// Header
+$headerBackgroundColor: #e6e6e6 !default; // header background
 $headerTextColor: #555 !default; // header text color
-$headerBorderColor: #aaa !default;  // header border color
-$headerSeparatorColor: #999 !default; // header bottom separator color
-$headerMargin: 4px !default; // padding round header
+$headerBorderColor: #aaa !default; // borders between column headers
+$headerSeparatorColor: #999 !default; // border between header and body
+$headerMargin: 4px !default; // vertical cell padding, used for row min-height
 
-// column header arrows
-$sortArrowHover: #555 !default;
-$sortArrowActive: #666 !default;
-$sortArrowInactive: #bbb !default;
+// Sort arrows
+$sortArrowHover: #555 !default; // sort arrow color on hover
+$sortArrowActive: #666 !default; // sort arrow color when sorted
+$sortArrowInactive: #bbb !default; // sort arrow color when not sorted
+
+// Tick / cross formatters
 $tickColor: #2dc214 !default;
 $crossColor: #ce1515 !default;
-$columnResizeGuideColor: #999 !default;
 
-// row theming
-$rowBackgroundColor: #fff !default; // table row background color
-$rowAltBackgroundColor: #efefef !default; // table row background color
-$rowBorderColor: #aaa !default; // table border color
-$rowTextColor: #333 !default; // table text color
-$rowHoverBackground: #bbb !default; // row background color on hover
+// Resize
+$columnResizeGuideColor: #999 !default; // column and row resize guide
 
-$rowSelectedBackground: #9abcea !default; // row background color when selected
-$rowSelectedBackgroundHover: #769bcc !default;// row background color when selected and hovered
+// Rows
+$rowBackgroundColor: #fff !default; // row background
+$rowAltBackgroundColor: #efefef !default; // even row background
+$rowBorderColor: #aaa !default; // cell and row borders
+$rowTextColor: #333 !default; // row text color
+$rowHoverBackground: #bbb !default; // row background on hover
+$rowSelectedBackground: #9abcea !default; // selected row background
+$rowSelectedBackgroundHover: #769bcc !default; // selected row background on hover
 
-$editBoxColor: #1d68cd !default; // border color for edit boxes
-$errorColor: #d00 !default; // error indication
+// Editing
+$editBoxColor: #1d68cd !default; // editing cell border, active list item
+$errorColor: #d00 !default; // validation failure
 
-// footer theming
-$footerBackgroundColor: #e6e6e6 !default; // border to tabulator
+// Footer
+$footerBackgroundColor: #e6e6e6 !default; // footer background
 $footerTextColor: #555 !default; // footer text color
-$footerBorderColor: #aaa !default; // footer border color
-$footerSeparatorColor: #999 !default; // footer bottom separator color
-$footerActiveColor: #d00 !default; // footer bottom active text color
+$footerBorderColor: #aaa !default; // pagination button borders
+$footerSeparatorColor: #999 !default; // border between body and footer
+$footerActiveColor: #d00 !default; // active pagination button text
+$spreadsheetActiveTabColor: #fff !default; // active spreadsheet tab background
 
-$spreadsheetActiveTabColor: #fff !default; // color for the active spreadsheet tab
-
-// range selection
-$rangeBorderColor: #2975dd !default; // range border color
-$rangeHandleColor: $rangeBorderColor !default; // range handle color
-$rangeHeaderSelectedBackground: #3876ca !default; // header background color when selected
-$rangeHeaderSelectedTextColor: #fff !default; // header text color when selected
-$rangeHeaderHighlightBackground: #d6d6d6 !default; // header background color when highlighted
-$rangeHeaderTextHighlightBackground: #000 !default; // header text color when highlighted
+// Range selection
+$rangeBorderColor: #2975dd !default; // range border
+$rangeHandleColor: $rangeBorderColor !default; // range resize handle
+$rangeHeaderSelectedBackground: #3876ca !default; // selected header background
+$rangeHeaderSelectedTextColor: #fff !default; // selected header text color
+$rangeHeaderHighlightBackground: #d6d6d6 !default; // highlighted header background
+$rangeHeaderTextHighlightBackground: #000 !default; // highlighted header text color (named "Background" for backward compatibility)
 
 // Tabulator Containing Element
 .tabulator {
@@ -235,7 +238,7 @@ $rangeHeaderTextHighlightBackground: #000 !default; // header text color when hi
 			// complex header column group
 			&.tabulator-col-group {
 
-				// gelement to hold sub columns in column group
+				// element to hold sub columns in column group
 				.tabulator-col-group-cols {
 					position: relative;
 					display: flex;
@@ -389,8 +392,6 @@ $rangeHeaderTextHighlightBackground: #000 !default; // header text color when hi
 			position: sticky;
 			left: 0;
 
-			// background-color: inherit;
-
 			z-index: 11;
 
 			&.tabulator-frozen-left {
@@ -410,8 +411,6 @@ $rangeHeaderTextHighlightBackground: #000 !default; // header text color when hi
 
 			border-top: 1px solid $rowBorderColor;
 			border-bottom: 1px solid $headerBorderColor;
-
-			// overflow: hidden;
 
 			.tabulator-row {
 				background: color.adjust($headerBackgroundColor, $lightness: 5%) !important;
