@@ -1,0 +1,152 @@
+@use "variables" as *;
+@use "internal" as *;
+
+// CSS triangle pointing in $direction (up, down, left, right)
+@mixin triangle($direction, $color, $size: $arrowSize) {
+	@if $direction == up {
+		border-left: $size solid transparent;
+		border-right: $size solid transparent;
+		border-bottom: $size solid $color;
+	} @else if $direction == down {
+		border-left: $size solid transparent;
+		border-right: $size solid transparent;
+		border-top: $size solid $color;
+		border-bottom: 0;
+	} @else if $direction == right {
+		border-top: $size solid transparent;
+		border-bottom: $size solid transparent;
+		border-right: 0;
+		border-left: $size solid $color;
+	}
+}
+
+// Column / row header inside a highlighted range
+@mixin range-header-highlight {
+	background-color: $rangeHeaderHighlightBackground;
+	color: $rangeHeaderTextHighlightBackground;
+}
+
+// Column / row header inside a selected range
+@mixin range-header-selected {
+	background-color: $rangeHeaderSelectedBackground;
+	color: $rangeHeaderSelectedTextColor;
+}
+
+// Data tree branch line
+@mixin data-tree-branch {
+	display: inline-block;
+	vertical-align: middle;
+	height: 9px;
+	width: 7px;
+	margin-top: -9px;
+	margin-right: 5px;
+	border-bottom-left-radius: 1px;
+	border-left: 2px solid $rowBorderColor;
+	border-bottom: 2px solid $rowBorderColor;
+}
+
+// Plus/minus sign drawn by data tree expand/collapse controls
+@mixin -data-tree-sign($background) {
+	display: inline-block;
+	position: relative;
+	height: 7px;
+	width: 1px;
+	background: $background;
+
+	&::after {
+		position: absolute;
+		content: "";
+		left: -3px;
+		top: 3px;
+		height: 1px;
+		width: 7px;
+		background: $rowTextColor;
+	}
+}
+
+// Data tree expand/collapse button
+@mixin data-tree-control {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	vertical-align: middle;
+	height: 11px;
+	width: 11px;
+	margin-right: 5px;
+	border: 1px solid $rowTextColor;
+	border-radius: 2px;
+	background: rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+
+	@media (hover:hover) and (pointer:fine) {
+		&:hover {
+			cursor: pointer;
+			background: rgba(0, 0, 0, 0.2);
+		}
+	}
+
+	.tabulator-data-tree-control-collapse {
+		@include -data-tree-sign(transparent);
+	}
+
+	.tabulator-data-tree-control-expand {
+		@include -data-tree-sign($rowTextColor);
+	}
+}
+
+// Row group header, shared by the table and the print output.
+// Level indentation is passed as @content.
+@mixin group-row {
+	box-sizing: border-box;
+	border-bottom: 1px solid $groupBorderColor;
+	border-right: 1px solid $rowBorderColor;
+	border-top: 1px solid $groupBorderColor;
+	padding: 5px;
+	padding-left: 10px;
+	background: $groupBackgroundColor;
+	font-weight: bold;
+	min-width: 100%;
+
+	@media (hover:hover) and (pointer:fine) {
+		&:hover {
+			cursor: pointer;
+			background-color: $groupHoverBackground;
+		}
+	}
+
+	&.tabulator-group-visible {
+		.tabulator-arrow {
+			margin-right: 10px;
+
+			@include triangle(down, $sortArrowActive);
+		}
+	}
+
+	@content;
+
+	.tabulator-group-toggle {
+		display: inline-block;
+	}
+
+	// collapsed group arrow
+	.tabulator-arrow {
+		display: inline-block;
+		width: 0;
+		height: 0;
+		margin-right: 16px;
+
+		@include triangle(right, $sortArrowActive);
+
+		vertical-align: middle;
+	}
+
+	span {
+		margin-left: 10px;
+		color: $groupCountColor;
+	}
+}
+
+// Group level indentation: 30px, 50px, ... for levels 1 to 5
+@function group-level-indent($level) {
+	@return 10px + $level * 20px;
+}

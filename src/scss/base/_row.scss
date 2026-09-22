@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins" as *;
 @use "internal" as *;
 
 // Row element
@@ -47,22 +48,19 @@
 
 	&.tabulator-range-highlight {
 		.tabulator-cell.tabulator-range-row-header {
-			background-color: $rangeHeaderHighlightBackground;
-			color: $rangeHeaderTextHighlightBackground;
+			@include range-header-highlight;
 		}
 
 		&.tabulator-range-selected {
 			.tabulator-cell.tabulator-range-row-header {
-				background-color: $rangeHeaderSelectedBackground;
-				color: $rangeHeaderSelectedTextColor;
+				@include range-header-selected;
 			}
 		}
 	}
 
 	&.tabulator-range-selected {
 		.tabulator-cell.tabulator-range-row-header {
-			background-color: $rangeHeaderSelectedBackground;
-			color: $rangeHeaderSelectedTextColor;
+			@include range-header-selected;
 		}
 	}
 

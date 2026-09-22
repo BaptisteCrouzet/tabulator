@@ -1,79 +1,14 @@
-@use "variables" as *;
-@use "internal" as *;
+@use "mixins" as *;
 
 .tabulator-row {
 	// row grouping element
 	&.tabulator-group {
-		box-sizing: border-box;
-		border-bottom: 1px solid $groupBorderColor;
-		border-right: 1px solid $rowBorderColor;
-		border-top: 1px solid $groupBorderColor;
-		padding: 5px;
-		padding-left: 10px;
-		background: $groupBackgroundColor;
-		font-weight: bold;
-
-		min-width: 100%;
-
-		@media (hover:hover) and (pointer:fine) {
-			&:hover {
-				cursor: pointer;
-				background-color: $groupHoverBackground;
+		@include group-row {
+			@for $level from 1 through 5 {
+				&.tabulator-group-level-#{$level} {
+					padding-left: group-level-indent($level);
+				}
 			}
-		}
-
-		&.tabulator-group-visible {
-
-			.tabulator-arrow {
-				margin-right: 10px;
-				border-left: $arrowSize solid transparent;
-				border-right: $arrowSize solid transparent;
-				border-top: $arrowSize solid $sortArrowActive;
-				border-bottom: 0;
-			}
-
-		}
-
-		&.tabulator-group-level-1 {
-			padding-left: 30px;
-		}
-
-		&.tabulator-group-level-2 {
-			padding-left: 50px;
-		}
-
-		&.tabulator-group-level-3 {
-			padding-left: 70px;
-		}
-
-		&.tabulator-group-level-4 {
-			padding-left: 90px;
-		}
-
-		&.tabulator-group-level-5 {
-			padding-left: 110px;
-		}
-
-		.tabulator-group-toggle {
-			display: inline-block;
-		}
-
-		// sorting arrow
-		.tabulator-arrow {
-			display: inline-block;
-			width: 0;
-			height: 0;
-			margin-right: 16px;
-			border-top: $arrowSize solid transparent;
-			border-bottom: $arrowSize solid transparent;
-			border-right: 0;
-			border-left: $arrowSize solid $sortArrowActive;
-			vertical-align: middle;
-		}
-
-		span {
-			margin-left: 10px;
-			color: $groupCountColor;
 		}
 	}
 }

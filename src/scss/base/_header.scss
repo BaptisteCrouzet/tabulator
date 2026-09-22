@@ -1,6 +1,38 @@
 @use "sass:color";
 @use "variables" as *;
+@use "mixins" as *;
 @use "internal" as *;
+
+// Sort arrow for one aria-sort state, pointing up or down
+@mixin sort-state($color, $direction) {
+	$edge: bottom;
+	$opposite: top;
+
+	@if $direction == down {
+		$edge: top;
+		$opposite: bottom;
+	}
+
+	.tabulator-col-content .tabulator-col-sorter {
+		color: $color;
+
+		@media (hover:hover) and (pointer:fine) {
+			&.tabulator-col-sorter-element .tabulator-arrow:hover {
+				cursor: pointer;
+				border-#{$edge}: $arrowSize solid $sortArrowHover;
+			}
+		}
+
+		.tabulator-arrow {
+			border-#{$opposite}: none;
+			border-#{$edge}: $arrowSize solid $color;
+
+			@if $direction == down {
+				color: $color;
+			}
+		}
+	}
+}
 
 .tabulator {
 	// column header containing element
@@ -62,13 +94,11 @@
 			}
 
 			&.tabulator-range-highlight {
-				background-color: $rangeHeaderHighlightBackground;
-				color: $rangeHeaderTextHighlightBackground;
+				@include range-header-highlight;
 			}
 
 			&.tabulator-range-selected {
-				background-color: $rangeHeaderSelectedBackground;
-				color: $rangeHeaderSelectedTextColor;
+				@include range-header-selected;
 			}
 
 			// hold content of column header
@@ -137,9 +167,8 @@
 					.tabulator-arrow {
 						width: 0;
 						height: 0;
-						border-left: $arrowSize solid transparent;
-						border-right: $arrowSize solid transparent;
-						border-bottom: $arrowSize solid $sortArrowInactive;
+
+						@include triangle(up, $sortArrowInactive);
 					}
 				}
 
@@ -199,59 +228,15 @@
 				}
 
 				&[aria-sort="none"] {
-					.tabulator-col-content .tabulator-col-sorter {
-						color: $sortArrowInactive;
-
-						@media (hover:hover) and (pointer:fine) {
-							&.tabulator-col-sorter-element .tabulator-arrow:hover {
-								cursor: pointer;
-								border-bottom: $arrowSize solid $sortArrowHover;
-							}
-						}
-
-						.tabulator-arrow {
-							border-top: none;
-							border-bottom: $arrowSize solid $sortArrowInactive;
-						}
-					}
+					@include sort-state($sortArrowInactive, up);
 				}
 
 				&[aria-sort="ascending"] {
-					.tabulator-col-content .tabulator-col-sorter {
-						color: $sortArrowActive;
-
-						@media (hover:hover) and (pointer:fine) {
-							&.tabulator-col-sorter-element .tabulator-arrow:hover {
-								cursor: pointer;
-								border-bottom: $arrowSize solid $sortArrowHover;
-							}
-						}
-
-						.tabulator-arrow {
-							border-top: none;
-							border-bottom: $arrowSize solid $sortArrowActive;
-
-						}
-					}
+					@include sort-state($sortArrowActive, up);
 				}
 
 				&[aria-sort="descending"] {
-					.tabulator-col-content .tabulator-col-sorter {
-						color: $sortArrowActive;
-
-						@media (hover:hover) and (pointer:fine) {
-							&.tabulator-col-sorter-element .tabulator-arrow:hover {
-								cursor: pointer;
-								border-top: $arrowSize solid $sortArrowHover;
-							}
-						}
-
-						.tabulator-arrow {
-							border-bottom: none;
-							border-top: $arrowSize solid $sortArrowActive;
-							color: $sortArrowActive;
-						}
-					}
+					@include sort-state($sortArrowActive, down);
 				}
 			}
 
